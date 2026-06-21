@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cocolino · Trattoria — Biograd na Moru</title>
+<meta name="description" content="Cocolino — topla talijanska trattoria u Biogradu na Moru. Pizza iz peći, domaća pasta, gelato i dolci uz svjetlost svijeća. Rezervirajte svoj stol." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#2A1410; --bg-2:#34190F; --panel:#3A1E15;
+    --cream:#F3E7D3; --cream-soft:#E6D4BA;
+    --terra:#C0552F; --terra-deep:#A6431F;
+    --tomato:#D9482B; --basil:#7E9B5B; --basil-deep:#5F7E40;
+    --gold:#D9A24A;
+    --ink:#1B0D09;
+    --radius:8px; --maxw:1180px;
+    --shadow:0 30px 70px -30px rgba(0,0,0,.7);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--cream);
+    line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',serif;font-weight:500;line-height:1.05;letter-spacing:.005em}
+  a{color:inherit;text-decoration:none}
+  img{display:block;width:100%;height:100%;object-fit:cover}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 30px}
+  .eyebrow{font-family:'DM Sans',sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.34em;font-size:.7rem;color:var(--gold)}
+  .btn{display:inline-flex;align-items:center;gap:.55em;font-family:'DM Sans';font-weight:600;font-size:.86rem;letter-spacing:.04em;padding:.95em 2em;border-radius:2px;cursor:pointer;border:none;transition:.35s;text-transform:uppercase}
+  .btn-primary{background:var(--terra);color:#fff}
+  .btn-primary:hover{background:var(--terra-deep);transform:translateY(-2px)}
+  .btn-outline{background:transparent;color:var(--cream);border:1px solid rgba(243,231,211,.4)}
+  .btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+
+  /* Header */
+  header{position:fixed;top:0;left:0;right:0;z-index:100;padding:22px 0;transition:.45s;border-bottom:1px solid transparent}
+  header.scrolled{background:rgba(26,12,9,.9);backdrop-filter:blur(12px);padding:12px 0;border-bottom:1px solid rgba(217,162,74,.18)}
+  .nav{display:flex;align-items:center;justify-content:space-between}
+  .brand{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.7rem;letter-spacing:.04em;color:var(--cream)}
+  .brand small{display:block;font-family:'DM Sans';font-weight:500;font-size:.56rem;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);margin-top:-4px}
+  .navlinks{display:flex;gap:34px}
+  .navlinks a{font-family:'DM Sans';font-weight:500;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;color:var(--cream-soft);position:relative;transition:color .3s}
+  .navlinks a:hover{color:var(--gold)}
+  .nav-cta{display:flex;gap:14px;align-items:center}
+  .burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px}
+  .burger span{width:26px;height:2px;background:var(--cream);transition:.3s}
+
+  /* Hero */
+  .hero{position:relative;height:100vh;min-height:660px;display:flex;align-items:flex-end;overflow:hidden}
+  .hero-img{position:absolute;inset:0;z-index:0}
+  .hero-img img{transform:scale(1.18);will-change:transform;filter:brightness(.66) saturate(1.05)}
+  .hero-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,12,9,.45) 0%,rgba(26,12,9,.2) 40%,rgba(26,12,9,.92) 100%)}
+  .hero-inner{position:relative;z-index:2;width:100%;padding-bottom:9vh}
+  .hero-inner .eyebrow{margin-bottom:18px;display:block}
+  .hero-inner h1{font-size:clamp(3rem,9vw,7.4rem);font-weight:500;letter-spacing:.01em}
+  .hero-inner h1 .it{font-style:italic;color:var(--gold)}
+  .word{display:inline-block}
+  .hero-sub{max-width:46ch;font-size:1.12rem;color:var(--cream-soft);margin:24px 0 30px}
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap}
+  .hero-meta{position:absolute;top:38%;right:30px;z-index:2;writing-mode:vertical-rl;text-orientation:mixed;font-family:'DM Sans';font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(243,231,211,.6)}
+
+  section{position:relative}
+  .pad{padding:120px 0}
+  .sec-head{max-width:680px;margin-bottom:60px}
+  .sec-head.center{margin:0 auto 60px;text-align:center}
+  .sec-head h2{font-size:clamp(2.4rem,5.5vw,4rem);margin:.2em 0 .35em;font-weight:500}
+  .sec-head h2 em{font-style:italic;color:var(--gold)}
+  .sec-head p{color:var(--cream-soft);font-size:1.06rem;max-width:54ch}
+  .rule{width:54px;height:2px;background:var(--terra);margin-bottom:24px}
+  .center .rule{margin-left:auto;margin-right:auto}
+
+  /* Intro / manifest */
+  .intro{background:var(--bg-2);border-top:1px solid rgba(217,162,74,.12);border-bottom:1px solid rgba(217,162,74,.12)}
+  .intro .quote{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4.2vw,3rem);font-weight:400;font-style:italic;line-height:1.32;text-align:center;max-width:24ch;margin:0 auto;color:var(--cream)}
+  .intro .quote span{color:var(--gold)}
+  .intro .by{text-align:center;margin-top:28px;font-family:'DM Sans';font-size:.78rem;letter-spacing:.3em;text-transform:uppercase;color:var(--cream-soft)}
+
+  /* Menu */
+  .menu-wrap{display:grid;grid-template-columns:1fr 1fr;gap:30px 70px}
+  .menu-col h3.cat{font-family:'Cormorant Garamond';font-size:2rem;font-style:italic;color:var(--gold);margin:26px 0 16px;padding-bottom:10px;border-bottom:1px solid rgba(217,162,74,.22)}
+  .menu-col h3.cat:first-child{margin-top:0}
+  .m-item{padding:14px 0;border-bottom:1px dotted rgba(243,231,211,.16)}
+  .m-item .nm{display:flex;align-items:baseline;gap:10px}
+  .m-item .nm h4{font-family:'Cormorant Garamond';font-weight:600;font-size:1.4rem;color:var(--cream)}
+  .m-item .nm .dots{flex:1;border-bottom:1px dotted rgba(243,231,211,.2);transform:translateY(-5px)}
+  .m-item .nm .tag{font-family:'DM Sans';font-weight:600;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--basil);border:1px solid var(--basil-deep);padding:.2em .6em;border-radius:2px}
+  .m-item p{color:var(--cream-soft);font-size:.94rem;margin-top:2px}
+
+  /* Feature split */
+  .feature{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch}
+  .feature .ph{min-height:520px;overflow:hidden}
+  .feature .ph img{transition:transform 1.2s}
+  .feature:hover .ph img{transform:scale(1.06)}
+  .feature .txt{background:var(--panel);padding:80px 70px;display:flex;flex-direction:column;justify-content:center}
+  .feature .txt h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:.4em}
+  .feature .txt p{color:var(--cream-soft);margin-bottom:1.1em}
+  .feature .sign{font-family:'Cormorant Garamond';font-style:italic;font-size:1.5rem;color:var(--gold);margin-top:.4em}
+
+  /* Gallery */
+  .gal{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:160px;gap:14px}
+  .gal .g{overflow:hidden;border-radius:var(--radius)}
+  .gal .g img{transition:transform 1s;filter:brightness(.92)}
+  .gal .g:hover img{transform:scale(1.08);filter:brightness(1)}
+  .gal .a{grid-column:span 5;grid-row:span 2}
+  .gal .b{grid-column:span 4;grid-row:span 2}
+  .gal .c{grid-column:span 3;grid-row:span 2}
+  .gal .d{grid-column:span 4}
+  .gal .e{grid-column:span 4}
+  .gal .f{grid-column:span 4}
+
+  /* Location */
+  .loc{background:var(--bg-2)}
+  .loc-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:54px;align-items:stretch}
+  .loc-info h2{font-size:clamp(2.2rem,4.5vw,3.4rem);margin-bottom:.4em;font-weight:500}
+  .loc-info h2 em{font-style:italic;color:var(--gold)}
+  .info-row{display:flex;gap:16px;padding:18px 0;border-bottom:1px solid rgba(243,231,211,.12)}
+  .info-row .ic{color:var(--terra);font-size:1.1rem;margin-top:3px}
+  .info-row b{font-family:'DM Sans';font-weight:600;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:3px}
+  .info-row span{color:var(--cream-soft);font-size:1rem}
+  .hours{list-style:none;margin-top:8px}
+  .hours li{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px dotted rgba(243,231,211,.14);font-size:.96rem}
+  .hours li b{font-family:'DM Sans';font-weight:600;color:var(--cream)}
+  .hours li span{color:var(--cream-soft)}
+  .map-wrap{border-radius:var(--radius);overflow:hidden;min-height:460px;box-shadow:var(--shadow);filter:saturate(.9)}
+  .map-wrap iframe{width:100%;height:100%;min-height:460px;border:0;display:block}
+
+  /* Reservation slide-in panel */
+  .res-overlay{position:fixed;inset:0;z-index:300;background:rgba(20,8,5,.6);backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:opacity .4s}
+  .res-overlay.open{opacity:1;pointer-events:auto}
+  .res-panel{position:fixed;top:0;right:0;height:100%;width:min(440px,100%);z-index:301;background:var(--panel);box-shadow:-30px 0 80px -30px rgba(0,0,0,.8);transform:translateX(100%);transition:transform .5s cubic-bezier(.2,.8,.2,1);padding:48px 42px;overflow-y:auto}
+  .res-panel.open{transform:translateX(0)}
+  .res-panel .close{position:absolute;top:24px;right:28px;background:none;border:none;color:var(--cream);font-size:1.9rem;cursor:pointer;line-height:1}
+  .res-panel h3{font-family:'Cormorant Garamond';font-size:2.4rem;color:var(--gold);margin-bottom:.2em}
+  .res-panel p.sub{color:var(--cream-soft);margin-bottom:28px;font-size:.96rem}
+  .res-panel label{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:16px 0 6px;font-weight:600}
+  .res-panel input,.res-panel select{width:100%;padding:.85em 1em;background:var(--bg);border:1px solid rgba(243,231,211,.2);color:var(--cream);border-radius:3px;font-family:'DM Sans';font-size:.95rem}
+  .res-panel input:focus,.res-panel select:focus{outline:none;border-color:var(--gold)}
+  .res-panel .btn-primary{width:100%;justify-content:center;margin-top:26px}
+  .res-panel .or{text-align:center;margin:22px 0;color:var(--cream-soft);font-size:.86rem}
+  .res-panel .phone-cta{display:block;text-align:center;font-family:'Cormorant Garamond';font-size:1.5rem;color:var(--gold)}
+
+  /* Footer */
+  footer{background:var(--ink);padding:80px 0 34px;border-top:1px solid rgba(217,162,74,.14)}
+  .foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:50px;margin-bottom:50px}
+  footer .brand{font-size:2rem;margin-bottom:.3em}
+  footer .ftxt{color:var(--cream-soft);font-size:.96rem;max-width:34ch}
+  footer h5{font-family:'DM Sans';font-weight:600;text-transform:uppercase;letter-spacing:.18em;font-size:.72rem;color:var(--gold);margin-bottom:16px}
+  footer ul{list-style:none}
+  footer ul li{margin-bottom:10px}
+  footer ul li a{color:var(--cream-soft);font-size:.96rem;transition:color .3s}
+  footer ul li a:hover{color:var(--gold)}
+  .foot-bottom{border-top:1px solid rgba(243,231,211,.1);padding-top:26px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.82rem;color:rgba(243,231,211,.45)}
+
+  .reveal{opacity:0;transform:translateY(36px)}
+
+  @media(max-width:920px){
+    .feature{grid-template-columns:1fr}
+    .feature .ph{min-height:340px}
+    .feature .txt{padding:54px 36px}
+    .menu-wrap{grid-template-columns:1fr;gap:0}
+    .loc-grid{grid-template-columns:1fr;gap:36px}
+    .gal{grid-template-columns:repeat(6,1fr)}
+    .gal .a,.gal .b,.gal .c,.gal .d,.gal .e,.gal .f{grid-column:span 6;grid-row:span 1}
+    .gal .a,.gal .b,.gal .c{grid-row:span 2}
+    .navlinks,.nav-cta .btn-outline{display:none}
+    .burger{display:flex}
+    .hero-meta{display:none}
+  }
+  @media(max-width:560px){
+    .pad{padding:80px 0}
+    .feature .txt{padding:44px 26px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .reveal{opacity:1!important;transform:none!important}
+    .hero-img img{transform:scale(1)!important}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+<header id="header">
+  <div class="wrap nav">
+    <a href="#top" class="brand">Cocolino<small>Trattoria · Biograd</small></a>
+    <nav class="navlinks">
+      <a href="#menu">Jelovnik</a>
+      <a href="#prica">Priča</a>
+      <a href="#galerija">Galerija</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="tel:+38523385584" class="btn btn-outline">Naruči</a>
+      <button class="btn btn-primary" id="openRes">Rezerviraj</button>
+      <button class="burger" id="burger" aria-label="Izbornik"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-img"><img id="heroImg" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1600&q=80" alt="Topla talijanska trattoria pri svjetlosti svijeća"></div>
+    <span class="hero-meta">Biograd na Moru · est. talijanska kuhinja</span>
+    <div class="hero-inner">
+      <div class="wrap">
+        <span class="eyebrow">Talijanska trattoria uz Jadran</span>
+        <h1 id="heroTitle">
+          <span class="word">Toplina</span> <span class="word it">Italije</span><br>
+          <span class="word">na</span> <span class="word">vašem</span> <span class="word">stolu</span>
+        </h1>
+        <p class="hero-sub">Pizza iz peći na drva, domaća pasta i gelato pri svjetlosti svijeća. Cocolino je mjesto gdje večer postaje uspomena.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" id="openRes2">Rezerviraj stol</button>
+          <a href="#menu" class="btn btn-outline">Jelovnik</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO / MANIFEST -->
+  <section class="intro pad">
+    <div class="wrap">
+      <p class="quote">„Coccolino" znači <span>mali zagrljaj</span> — i upravo to služimo, na svakom tanjuru, svake večeri.</p>
+      <p class="by">— Cocolino, Biograd na Moru</p>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section id="menu" class="pad">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="rule"></div>
+        <span class="eyebrow">Jelovnik</span>
+        <h2>Okusi koji <em>griju dušu</em></h2>
+        <p>Sezonske namirnice, tijesto koje se diže polako i recepti njegovani godinama. Sve nastaje u našoj kuhinji, svaki dan iznova.</p>
+      </div>
+      <div class="menu-wrap">
+        <div class="menu-col reveal">
+          <h3 class="cat">Pizza dal forno</h3>
+          <div class="m-item"><div class="nm"><h4>Margherita</h4><span class="dots"></span><span class="tag">klasik</span></div><p>San Marzano, fior di latte, svježi bosiljak, maslinovo ulje.</p></div>
+          <div class="m-item"><div class="nm"><h4>Diavola</h4><span class="dots"></span></div><p>Pikantna talijanska salama, mozzarella i nota čilija.</p></div>
+          <div class="m-item"><div class="nm"><h4>Quattro Stagioni</h4><span class="dots"></span></div><p>Šunka, gljive, artičoke i masline — četiri godišnja doba na tijestu.</p></div>
+          <div class="m-item"><div class="nm"><h4>Tartufo e Funghi</h4><span class="dots"></span><span class="tag">specijal</span></div><p>Vrganji, krema od tartufa i parmezan — bogata i mirisna.</p></div>
+
+          <h3 class="cat">Pasta fatta in casa</h3>
+          <div class="m-item"><div class="nm"><h4>Tagliatelle al Ragù</h4><span class="dots"></span></div><p>Domaće trake u sporo kuhanom ragùu, kao nedjeljni ručak.</p></div>
+          <div class="m-item"><div class="nm"><h4>Spaghetti alle Vongole</h4><span class="dots"></span><span class="tag">more</span></div><p>Školjke kunjke, bijelo vino, češnjak i peršin.</p></div>
+          <div class="m-item"><div class="nm"><h4>Ravioli di Ricotta</h4><span class="dots"></span></div><p>Punjeni ricottom i špinatom, u maslacu i kadulji.</p></div>
+        </div>
+        <div class="menu-col reveal">
+          <h3 class="cat">Gelato artigianale</h3>
+          <div class="m-item"><div class="nm"><h4>Stracciatella</h4><span class="dots"></span><span class="tag">hit</span></div><p>Kremasta vanilija s komadićima hrskave čokolade.</p></div>
+          <div class="m-item"><div class="nm"><h4>Pistacchio di Bronte</h4><span class="dots"></span></div><p>Pravi sicilijanski pistacchio, dubok i orašast.</p></div>
+          <div class="m-item"><div class="nm"><h4>Cioccolato Fondente</h4><span class="dots"></span></div><p>Intenzivna tamna čokolada za istinske sladokusce.</p></div>
+          <div class="m-item"><div class="nm"><h4>Limone della Costiera</h4><span class="dots"></span></div><p>Osvježavajući sorbet od limuna, kao morski povjetarac.</p></div>
+
+          <h3 class="cat">Dolci</h3>
+          <div class="m-item"><div class="nm"><h4>Tiramisù della Casa</h4><span class="dots"></span><span class="tag">ponos kuće</span></div><p>Mascarpone, savoiardi natopljeni espressom, kakao.</p></div>
+          <div class="m-item"><div class="nm"><h4>Panna Cotta</h4><span class="dots"></span></div><p>Svilenkasta krema s preljevom od šumskog voća.</p></div>
+          <div class="m-item"><div class="nm"><h4>Cannoli Siciliani</h4><span class="dots"></span></div><p>Hrskave rolice punjene slatkom ricottom i čokoladom.</p></div>
+          <div class="m-item"><div class="nm"><h4>Affogato al Caffè</h4><span class="dots"></span></div><p>Kuglica gelata preliva vrući espresso — toplo i hladno.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE / STORY -->
+  <section id="prica" class="feature">
+    <div class="ph reveal"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1000&q=80" alt="Toplo ozračje trattorije pri svijećama"></div>
+    <div class="txt reveal">
+      <span class="eyebrow">Naša priča</span>
+      <h2>Stol za kojim se ostaje dugo</h2>
+      <p>Cocolino — „mali zagrljaj" na talijanskom — rođen je iz želje da se u Biograd na Moru donese komadić prave talijanske gostoljubivosti. Tople boje, svjetlost svijeća i miris peći na drva dočekuju vas na vratima.</p>
+      <p>Tijesto dižemo polako, ragù krčkamo satima, a gelato vrtimo svakoga jutra. Vjerujemo da dobra večera nije samo hrana — to je vrijeme provedeno s onima koje volimo, bez žurbe.</p>
+      <p>Bilo da slavite, dolazite s obitelji ili samo tražite mirnu večer uz čašu vina — naš stol je vaš.</p>
+      <div class="sign">— Obitelj Cocolino</div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="galerija" class="pad">
+    <div class="wrap">
+      <div class="sec-head center reveal">
+        <div class="rule"></div>
+        <span class="eyebrow">Galerija</span>
+        <h2>Večeri u <em>Cocolinu</em></h2>
+        <p>Svjetlo svijeća, topli tanjuri i more na korak — atmosfera koja ostaje s vama.</p>
+      </div>
+      <div class="gal">
+        <div class="g a reveal"><img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=900&q=80" alt="Pizza iz peći na drva"></div>
+        <div class="g b reveal"><img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=800&q=80" alt="Domaća pasta s umakom"></div>
+        <div class="g c reveal"><img src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=600&q=80" alt="Tiramisu desert"></div>
+        <div class="g d reveal"><img src="https://images.unsplash.com/photo-1528826107860-7e92e7f0a3a1?auto=format&fit=crop&w=700&q=80" alt="Šetnica uz more u Biogradu"></div>
+        <div class="g e reveal"><img src="https://images.unsplash.com/photo-1567206563064-6f60f40a2b57?auto=format&fit=crop&w=700&q=80" alt="Gelato u kornetu"></div>
+        <div class="g f reveal"><img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=700&q=80" alt="Topli detalji stola pri svijećama"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATION / CONTACT -->
+  <section id="kontakt" class="loc pad">
+    <div class="wrap">
+      <div class="loc-grid">
+        <div class="loc-info reveal">
+          <div class="rule"></div>
+          <span class="eyebrow">Posjetite nas</span>
+          <h2>Nađimo se u <em>Biogradu</em></h2>
+          <div class="info-row"><span class="ic">●</span><div><b>Adresa</b><span>Biograd na Moru, Zadarska županija</span></div></div>
+          <div class="info-row"><span class="ic">●</span><div><b>Rezervacije & narudžbe</b><span><a href="tel:+38523385584">+385 23 385 584</a></span></div></div>
+          <div class="info-row"><span class="ic">●</span><div><b>Atmosfera</b><span>Topla trattoria, obiteljski dobrodošli, terasa uz šetnicu</span></div></div>
+          <ul class="hours">
+            <li><b>Ponedjeljak – Petak</b><span>11:00 – 23:00</span></li>
+            <li><b>Subota</b><span>11:00 – 24:00</span></li>
+            <li><b>Nedjelja</b><span>11:00 – 23:00</span></li>
+          </ul>
+          <button class="btn btn-primary" id="openRes3" style="margin-top:28px">Rezerviraj stol</button>
+        </div>
+        <div class="map-wrap reveal">
+          <iframe src="https://maps.google.com/maps?q=Cocolino+Biograd+na+Moru&output=embed" loading="lazy" title="Cocolino na karti — Biograd na Moru"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="brand serif">Cocolino</div>
+        <p class="ftxt">Topla talijanska trattoria u Biogradu na Moru. Pizza, pasta, gelato i dolci pri svjetlosti svijeća.</p>
+      </div>
+      <div>
+        <h5>Stranice</h5>
+        <ul>
+          <li><a href="#menu">Jelovnik</a></li>
+          <li><a href="#prica">Naša priča</a></li>
+          <li><a href="#galerija">Galerija</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Kontakt</h5>
+        <ul>
+          <li><a href="tel:+38523385584">+385 23 385 584</a></li>
+          <li>Biograd na Moru</li>
+          <li>Zadarska županija, Hrvatska</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Cocolino · Trattoria · Sva prava pridržana</span>
+      <span>Buon appetito</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Reservation slide-in panel -->
+<div class="res-overlay" id="resOverlay"></div>
+<aside class="res-panel" id="resPanel" aria-hidden="true">
+  <button class="close" id="closeRes" aria-label="Zatvori">&times;</button>
+  <h3>Rezervacija</h3>
+  <p class="sub">Ostavite podatke i javit ćemo vam se za potvrdu, ili nas jednostavno nazovite.</p>
+  <form id="resForm" onsubmit="return false;">
+    <label for="rname">Ime i prezime</label>
+    <input id="rname" type="text" placeholder="Vaše ime" required>
+    <label for="rdate">Datum</label>
+    <input id="rdate" type="date">
+    <label for="rtime">Vrijeme</label>
+    <select id="rtime">
+      <option>18:00</option><option>19:00</option><option>20:00</option><option>21:00</option>
+    </select>
+    <label for="rguests">Broj gostiju</label>
+    <select id="rguests">
+      <option>2 osobe</option><option>3 osobe</option><option>4 osobe</option><option>5+ osoba</option>
+    </select>
+    <button class="btn btn-primary" id="resSubmit">Pošalji upit</button>
+  </form>
+  <p class="or">— ili nazovite —</p>
+  <a class="phone-cta" href="tel:+38523385584">+385 23 385 584</a>
+</aside>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var header=document.getElementById('header');
+  function onScroll(){ if(window.scrollY>30) header.classList.add('scrolled'); else header.classList.remove('scrolled'); }
+  window.addEventListener('scroll',onScroll); onScroll();
+
+  // Reservation panel
+  var overlay=document.getElementById('resOverlay'), panel=document.getElementById('resPanel');
+  function openRes(){ overlay.classList.add('open'); panel.classList.add('open'); panel.setAttribute('aria-hidden','false'); }
+  function closeRes(){ overlay.classList.remove('open'); panel.classList.remove('open'); panel.setAttribute('aria-hidden','true'); }
+  ['openRes','openRes2','openRes3'].forEach(function(id){ var b=document.getElementById(id); if(b) b.addEventListener('click',openRes); });
+  document.getElementById('closeRes').addEventListener('click',closeRes);
+  overlay.addEventListener('click',closeRes);
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeRes(); });
+  var rs=document.getElementById('resSubmit');
+  if(rs) rs.addEventListener('click',function(){ alert('Hvala! Vaš upit je zabilježen. Za brzu potvrdu nazovite +385 23 385 584.'); closeRes(); });
+
+  // Mobile: burger opens reservation as quick action / scroll to menu
+  var burger=document.getElementById('burger');
+  if(burger) burger.addEventListener('click',function(){ document.getElementById('menu').scrollIntoView({behavior:reduce?'auto':'smooth'}); });
+
+  if(reduce){
+    document.querySelectorAll('.reveal').forEach(function(e){e.style.opacity=1;e.style.transform='none';});
+    return;
+  }
+
+  var lenis=new Lenis({lerp:0.09,smoothWheel:true});
+  function raf(t){ lenis.raf(t); requestAnimationFrame(raf); }
+  requestAnimationFrame(raf);
+
+  gsap.registerPlugin(ScrollTrigger);
+  lenis.on('scroll', ScrollTrigger.update);
+
+  // Hero zoom-on-load + word reveal
+  gsap.to('#heroImg',{scale:1.0,duration:2.4,ease:'power2.out'});
+  gsap.from('#heroTitle .word',{yPercent:120,opacity:0,duration:1.1,ease:'power4.out',stagger:0.09,delay:0.25});
+  gsap.from('.hero-sub,.hero-actions',{y:24,opacity:0,duration:1,ease:'power3.out',stagger:0.12,delay:0.9});
+  gsap.from('.hero .eyebrow',{y:16,opacity:0,duration:1,ease:'power3.out',delay:0.15});
+
+  // Hero parallax
+  gsap.to('#heroImg',{yPercent:14,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+
+  // Reveals
+  gsap.utils.toArray('.reveal').forEach(function(el){
+    gsap.to(el,{opacity:1,y:0,duration:1.1,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 87%'}});
+  });
+})();
+</script>
+</body>
+</html>
