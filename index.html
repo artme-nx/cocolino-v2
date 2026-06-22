@@ -415,7 +415,7 @@
     return;
   }
 
-  var lenis=new Lenis({lerp:0.09,smoothWheel:true});
+  var lenis=new Lenis({lerp:0.2, wheelMultiplier:1, smoothWheel:true, syncTouch:false});
   function raf(t){ lenis.raf(t); requestAnimationFrame(raf); }
   requestAnimationFrame(raf);
 
